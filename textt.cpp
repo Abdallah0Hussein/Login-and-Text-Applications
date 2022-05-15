@@ -5,11 +5,12 @@
 // Group: A
 // Date: April  2022
 // Section: 5,6
+// ...........................................................................................
 #include "text_app.cpp"
+// ...........................................................................................
 int main()
 {
     creat_file(); // this function to exist file if not found it create new file.
-
     cout << "Ahlan ya user ya habibi :D\n";
     cout << "Please select what you want or enter 16 to exit: \n";
     cout << "1- Add new text to the end of the file\n";
@@ -125,7 +126,8 @@ int main()
     }
     if (num_of_filter == 16)
     {
-        return 1;
+        return 1; // exit
     }
     return 0;
 }
+// ...........................................................................................

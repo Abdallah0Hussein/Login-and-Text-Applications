@@ -1,4 +1,12 @@
-#include"login_app.h"
+// FCAI – Programming 1 – 2022 - Assignment 4
+// Program: login_app.cpp
+// Author: Abdallah Hussein Ibrahim Hussein - Esraa Mahmoud Abdelmohsen - Youssef Abdelghafar Abdeltawab
+// IDs: 20210235 - 20210063 - 20210474
+// Group: A
+// Date: May  2022
+// Section: 5,6
+// ...........................................................................................
+#include "login_app.h"
 string display_menu()
 {
     cout << "Enter the num of op you want!\n"
@@ -18,7 +26,6 @@ void registeration()
 // ...........................................................................................
 void login()
 {
-
     int count = 3;
     while (true)
     {
@@ -26,11 +33,10 @@ void login()
         cout << "Enter your UserName :\n";
         getline(cin, username);
         cout << "Enter your Password :\n";
-        // Hide_password_recently_pass();
         coverpass(password);
         Cipher(password);
         cout << "\n";
-        if (!(valid_Exist_user() && valid_Exist_pass()))
+        if (!(valid_Exist_user() && valid_Exist_pass())) // check if the user and password in the file or not
         {
             cout << "Failed login. Try again. \n";
             count -= 1;
@@ -59,7 +65,7 @@ void changePassword()
     saveData();
 }
 // ...........................................................................................
-void existing()
+void existing() // save file content to a vector called user
 {
     userfile.open("info.txt", ios::in);
     while (!userfile.eof())
@@ -73,10 +79,11 @@ void existing()
     }
     userfile.close();
 }
-void saveData()
+// ...........................................................................................
+void saveData() // to save tha data in the file
 {
     userfile.close();
-    if (valid1 && choice == "1" && saving)
+    if (valid1 && choice == "1" && saving) // if the user choosed login
     {
         userfile.open("info.txt", ios::app);
         userfile << username;
@@ -85,43 +92,44 @@ void saveData()
         userfile << " ";
         userfile << phonenum;
         userfile << " ";
-        Cipher(password);
+        Cipher(password); // cipher the password before saving it
         userfile << password;
         userfile << "\n";
         userfile.close();
     }
-    else if (choice == "1" && !saving)
+    else if (choice == "1" && !saving) // if the user choosed password
     {
         char line[100];
         vector<string> text;
         int k = 0;
         userfile.close();
         userfile.open("info.txt");
-        while (!userfile.eof())
+        while (!userfile.eof()) // loop until u go to EOF (End Of File)
         {
-            userfile.getline(line, 100, '\n');
-            text.push_back(string(line));
+            userfile.getline(line, 100, '\n'); // save file contents as lines until u find an end-line (take line line)
+            text.push_back(string(line));      // save this line in the vector
         }
         int x, z;
-        for (int i = 0; i < text.size(); i++)
+        for (int i = 0; i < text.size(); i++) // loop only in the row (line)
         {
-            if (text[i].find(old_Pass, 0) < 1000)
+            if (text[i].find(old_Pass, 0) < 1000) // if find the old pass in the vector text
             {
-                x = text[i].find(old_Pass, 0);
-                z = i;
+                x = text[i].find(old_Pass, 0); // make int x = index that the old passworn in the line. this to make x as a column in the next for loop. (x like colummn)
+                z = i;                         // to know the value of i (row)
             }
         }
-        for (int j = x; j < (x + new_pass.size()); j++)
+        for (int j = x; j < (x + new_pass.size()); j++) // make j = x to get coliumn of the old password. x + new_pass because x is the column and new_pass.size() ..
+                                                        // ..the size that this for loop will lopp until replacing old with new password
         {
-            text[z][j] = new_pass[k];
-            k++;
+            text[z][j] = new_pass[k]; // z for i (z means the row the he finds the old password in it)
+            k++;                      // k starts from 0 to loop normaly in new_pass
         }
         userfile.close();
         userfile.open("info.txt", ios::out);
-        for (int i = 0; i < text.size(); i++)
+        for (int i = 0; i < text.size(); i++) // save the new_password in the file
         {
             userfile << text[i];
-            if (i == text.size() - 1)
+            if (i == text.size() - 1) // to avoid making one more end-line at the end
                 continue;
             else
                 userfile << '\n';
@@ -131,14 +139,13 @@ void saveData()
     valid1 = false;
     saving = true;
 }
-
 // ...........................................................................................
 void check_UN()
 {
     cout << "enter your name in format (characters or '_'):\n";
     getline(cin, username);
     regex valid("[a-zA-Z,_]+");
-    if (!regex_match(username, valid))
+    if (!regex_match(username, valid)) // if it's not a correct username
     {
         while (!regex_match(username, valid))
         {
@@ -152,10 +159,10 @@ void check_UN()
     }
     else
     {
-        if (valid_Exist_user())
+        if (valid_Exist_user()) // if it's a correct username and the user is taken before
         {
             cout << "this username is taken before. choose another one\n";
-            check_UN();
+            check_UN(); // repeat
         }
         else
             valid1 = true;
@@ -164,11 +171,11 @@ void check_UN()
 // ...........................................................................................
 bool valid_Exist()
 {
-    existing();
+    existing(); // save file content to a vector called user
     bool x = false;
-    for (user_profile emails : user)
+    for (user_profile emails : user) // loop in the vector user
     {
-        if (email == emails.email)
+        if (email == emails.email) // if the global variable email == email saved in the vector
         {
             x = true; // to finish looping in the whole file
             break;
@@ -180,13 +187,14 @@ bool valid_Exist()
     }
     return x;
 }
+// ...........................................................................................
 bool valid_Exist_pass()
 {
-    existing();
+    existing(); // save file content to a vector called user
     bool x = false;
-    for (user_profile passw : user)
+    for (user_profile passw : user) // loop in the vector user
     {
-        if (password == passw.password)
+        if (password == passw.password) // if the global variable password == password saved in the vector
         {
             x = true; // to finish looping in the whole file
             break;
@@ -198,13 +206,14 @@ bool valid_Exist_pass()
     }
     return x;
 }
+// ...........................................................................................
 bool valid_Exist_user()
 {
-    existing();
+    existing(); // save file content to a vector called user
     bool x = false;
-    for (user_profile name : user)
+    for (user_profile name : user) // loop in the vector user
     {
-        if (username == name.username)
+        if (username == name.username) // if the global variable username == username saved in the vector
         {
             x = true; // to finish looping in the whole file
             break;
@@ -221,8 +230,8 @@ void check_E()
 {
     cout << "enter your email\n";
     getline(cin, email);
-    regex valid("\\w+@gmail\\.com");
-    if (!regex_match(email, valid))
+    regex valid("\\w+@\\w+\\.com");
+    if (!regex_match(email, valid)) // if it's not a correct email
     {
         while (!regex_match(email, valid))
         {
@@ -237,24 +246,22 @@ void check_E()
     }
     else
     {
-        if (valid_Exist())
+        if (valid_Exist()) // if it's a correct username and the user is taken before
         {
             cout << "this email is taken before. choose another one\n";
-            check_E();
+            check_E(); // repeat
         }
         else
             valid1 = true;
     }
 }
 // ...........................................................................................
-
-// ...........................................................................................
 void check_PN()
 {
     cout << "enter your number: \n";
     getline(cin, phonenum);
     regex valid("01[0-2,5]{1}[0-9]{8}+");
-    if (!regex_match(phonenum, valid))
+    if (!regex_match(phonenum, valid)) // if it's not a correct phonenum
     {
         while (!regex_match(phonenum, valid))
         {
@@ -271,13 +278,10 @@ void check_PN()
     else
         valid1 = true;
 }
-
-// ...........................................................................................
-
 // ...........................................................................................
 void check_PW()
 {
-    if (choice == "1")
+    if (choice == "1") // if he chooses login
     {
         cout << "Your password should be 12-35 digits.\n";
         cout << "It shoud starts with >>> 3-10 digits <<< of each: small letters, capital letters, numbers then special charcters Respectively.\n";
@@ -285,11 +289,10 @@ void check_PW()
 
         while (true)
         {
-        here:
+        here: // go here and repeat. also this is to avoid making and infinte loop
             cout << "enter the password\n";
             coverpass(password);
-            //         getline(cin, password);
-            if (valid_PW())
+            if (valid_PW()) // if the password entered in a right way
             {
                 valid1 = true;
                 string confirm;
@@ -297,8 +300,7 @@ void check_PW()
                 {
                     cout << "Please confirm your password:\n";
                     coverpass(confirm);
-                    //                     getline(cin,confirm);
-                    if (!(password == confirm))
+                    if (!(password == confirm)) // if the password u entered doesn't matvh with the confirm password
                     {
                         cout << "Your repeated password doesn't match with the first one.\n";
                     }
@@ -313,12 +315,12 @@ void check_PW()
             else
             {
                 cout << "NOT a valid password, try again.\nEnter the password:\n";
-                goto here;
+                goto here; // to go somewher and repeat
             }
             break;
         }
     }
-    else if (choice == "3" && mark == true)
+    else if (choice == "3" && mark == true) // if he choosed change password
     {
 
         while (true)
@@ -326,15 +328,15 @@ void check_PW()
             cout << "Enter Your Old Password:\n";
             coverpass(old_Pass);
             Cipher(old_Pass);
-            //                     getline(cin,confirm);
-            if (!(password == old_Pass))
+            if (!(password == old_Pass)) // is the password he entered doesn't match with the old password
             {
                 cout << "Your old password is wrong.\n";
             }
             else
             {
                 cout << "Enter Your New Password Twice to accept info and the two password should the same things :\n";
-                choice = "1";
+                choice = "1"; // this to make it go to the previous if condition to enter a new password and also to go to saveData() function
+                              // and then go to the second if condition which is for change password
                 check_PW();
                 break;
             }
@@ -347,7 +349,7 @@ bool valid_PW()
     regex valid("([a-z]{3,10}[A-Z]{3,10}[0-9]{3,10}[!-/:-@]{3,10})");
     return (regex_match(password, valid));
 }
-
+// ...........................................................................................
 void coverpass(string &final_password)
 {
     cout << "Press any key to start typing your password then type\n";
@@ -384,11 +386,12 @@ void coverpass(string &final_password)
     }
     cout << "\nYou have entered: " << final_password << '\n';
 }
-
+// ...........................................................................................
 void Cipher(string &pass)
 {
     for (int i = 0; i < pass.size(); i++)
     {
-        pass[i] = char(int(pass[i] + 1));
+        pass[i] = char(int(pass[i] + 1)); // add to every character's ascii one to cipher the password
     }
 }
+// ...........................................................................................

@@ -1,3 +1,11 @@
+// FCAI – Programming 1 – 2022 - Assignment 4
+// Program: text-editor.cpp
+// Author: Abdallah Hussein Ibrahim Hussein - Esraa Mahmoud Abdelmohsen - Youssef Abdelghafar Abdeltawab
+// IDs: 20210235 - 20210063 - 20210474
+// Group: A
+// Date: April  2022
+// Section: 5,6
+// ...........................................................................................
 #include <bits/stdc++.h>
 using namespace std;
 void addition();                              // Author: Esraa Mahmoud Abdelmohsen - 20210063
@@ -16,6 +24,6 @@ void convert_the_all_letters_to_upper_case(); // Author: Youssef Abdelghafar Abd
 void First_Char_Capitalize();                 // Author: Youssef Abdelghafar Abdeltawab - 20210474
 void save();                                  // Author: Youssef Abdelghafar Abdeltawab - 20210474
 void creat_file();
-
 fstream myfile;      // file from kind ifstream to read the file.
 char file_name[100]; // file name from char data type to input file name.
+// ...........................................................................................

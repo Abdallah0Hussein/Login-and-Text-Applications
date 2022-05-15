@@ -1,4 +1,13 @@
+// FCAI – Programming 1 – 2022 - Assignment 4
+// Program: text-editor.cpp
+// Author: Abdallah Hussein Ibrahim Hussein - Esraa Mahmoud Abdelmohsen - Youssef Abdelghafar Abdeltawab
+// IDs: 20210235 - 20210063 - 20210474
+// Group: A
+// Date: May  2022
+// Section: 5,6
+// ..................................................................................................................................................
 #include "text_app.h"
+// ..................................................................................................................................................
 // this function to add content to file without lose the original content
 void addition()
 {
@@ -19,6 +28,7 @@ void addition()
     add.close(); // close file
     cout << "Done!!\n";
 }
+// ..................................................................................................................................................
 // displays the current file content to the user.
 void display()
 {
@@ -31,6 +41,7 @@ void display()
     }
     read.close(); // close file
 }
+// ..................................................................................................................................................
 // this function to clear the content from file
 void erase()
 {
@@ -40,6 +51,7 @@ void erase()
     erase.close(); // close file
     cout << "Done!!\n";
 }
+// ..................................................................................................................................................
 void encrypt()
 {
     ifstream txt;     // file which i read from
@@ -68,6 +80,7 @@ void encrypt()
     txt.close();
     cout << "Done!!\n";
 }
+// ..................................................................................................................................................
 void decrypt()
 {
     ifstream encrypt; // file which i read from
@@ -96,6 +109,7 @@ void decrypt()
     encrypt.close();
     cout << "Done!!\n";
 }
+// ..................................................................................................................................................
 // this function to exist file if not found it create new file.
 void creat_file()
 {
@@ -120,7 +134,7 @@ void creat_file()
         cout << "This File Already Exists.\n ";
     }
 }
-
+// ..................................................................................................................................................
 void search_Word()
 {
     cout << "Enter the word: ";
@@ -151,6 +165,7 @@ void search_Word()
     if (!find)
         cout << "The word was not found in the file. :(\nDone!!\n";
 }
+// ..................................................................................................................................................
 void count_Lines()
 {
     ifstream myfile;
@@ -168,9 +183,10 @@ void count_Lines()
             ++tot_Lines;
         i++;
     }
-    ++tot_Lines; // add one more because number of total Lines = '\n' + 1. 
+    ++tot_Lines; // add one more because number of total Lines = '\n' + 1.
     cout << "The number of lines in the file is: " << tot_Lines << "\nDone!!\n";
 }
+// ..................................................................................................................................................
 void count_Chars()
 {
     ifstream myfile;
@@ -184,7 +200,7 @@ void count_Chars()
     myfile.open(file_name, ios::out);
     while (true) // definsive
     {
-        getline(cin, enter); 
+        getline(cin, enter);
         if (enter == "1" || enter == "2")
         {
             option = stoi(enter);
@@ -219,6 +235,7 @@ void count_Chars()
         cout << "The number of characters with spaces in the file is: " << num << "\nDone!!\n";
     }
 }
+// ..................................................................................................................................................
 void count_Words()
 {
     ifstream myfile;
@@ -244,6 +261,7 @@ void count_Words()
     }
     cout << "The number of words in the file is: " << tot_Words << "\nDone!!\n";
 }
+// ..................................................................................................................................................
 void Merge()
 {
     fstream myfile;
@@ -281,20 +299,14 @@ void Merge()
     myfile2.close();
     cout << "Done!!\n";
 }
-
+// ..................................................................................................................................................
 // Count the number of times a word exists in the file takes from the user a word and prints the number of times the word exists in the file.
 
 // Count the number of times a word exists in the file takes from the user a word and prints the number of times the word exists in the file.
 void the_words_repeated()
 {
     ifstream myfile; // file from kind ifstream to read the file.
-                     //    char name_files[100]; // file name from char data type to input file name.
     int counter = 0; // this counter to calc how many the word is repeated.
-
-    //    cout << "enter the source file name with extension (like files.txt): " << endl;
-    //    cout << "NAME_OF_FILE: " << " ";
-    //    cin >> name_files; // file name do you want to read from it
-
     myfile.open(file_name);
     if (!myfile.is_open())
     { // if the file not open this message is appear.
@@ -316,7 +328,7 @@ void the_words_repeated()
          << " " << counter << endl; // print the number of word repeated.
     cout << "Done!!" << endl;
 }
-
+// ..................................................................................................................................................
 // this function to change all character to capital.
 void convert_the_all_letters_to_upper_case()
 {
@@ -339,7 +351,7 @@ void convert_the_all_letters_to_upper_case()
     myfile2 << text_file2;               // to print in the file new edition
     cout << "Done!!" << endl;
 }
-
+// ..................................................................................................................................................
 // this function to change all character to small.
 void convert_the_all_letters_to_lower_case()
 {
@@ -362,7 +374,7 @@ void convert_the_all_letters_to_lower_case()
     myfile2 << text_file2;               // to print in the file new edition
     cout << "Done!!" << endl;
 }
-
+// ..................................................................................................................................................
 void First_Char_Capitalize()
 {
     char text_file;    // the text in the file.
@@ -399,7 +411,7 @@ void First_Char_Capitalize()
     myfile2 << text_file2;
     cout << "Done!!" << endl;
 }
-
+// ..................................................................................................................................................
 // function to doing save the file in to another file .
 void save()
 {
@@ -428,3 +440,4 @@ void save()
     myfile2 << content2;
     cout << "Done!!" << endl;
 }
+// ..................................................................................................................................................

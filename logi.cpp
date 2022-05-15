@@ -1,4 +1,12 @@
-#include"login_app.cpp"
+// FCAI – Programming 1 – 2022 - Assignment 4
+// Program: login_app.cpp
+// Author: Abdallah Hussein Ibrahim Hussein - Esraa Mahmoud Abdelmohsen - Youssef Abdelghafar Abdeltawab
+// IDs: 20210235 - 20210063 - 20210474
+// Group: A
+// Date: May  2022
+// Section: 5,6
+// ...........................................................................................
+#include "login_app.cpp"
 int main()
 {
     while (true)
@@ -6,9 +14,7 @@ int main()
         display_menu();
         if (choice == "1") // REGISTRATION
         {
-            // deCipher();
             registeration();
-            // Cipher();
         }
         else if (choice == "2") // LOGIN
         {
@@ -30,4 +36,3 @@ int main()
     }
 }
 // ...........................................................................................
-
